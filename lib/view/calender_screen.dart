@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:stv_calender/view/mordal_slider.dart';
 import "package:table_calendar/table_calendar.dart";
 import "package:intl/intl.dart";
 import "color.dart";
 import "package:stv_calender/view/schedule_dialog.dart";
-
+import "package:stv_calender/view/mordal_slider.dart";
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 class CalenderScreen extends StatefulWidget {
@@ -53,13 +54,14 @@ class _CalenderScreenState extends State<CalenderScreen> {
   /////////////////////
   @override
   Widget build(BuildContext context) {
-
-    void _showDialog(BuildContext context,day) {
+    void _showDialog(BuildContext context, day) {
       showDialog(
         context: context,
         builder: (context) {
-          return ScheduleDialog(day: day);
-            const AlertDialog(
+          return ScheduleDialog(
+            day: day,
+          );
+          const AlertDialog(
             content: Text('真ん中に出てくるやつ'), // <= ここでダイアログに表示したいWidgetを返してあげればOK
           );
         },
@@ -99,12 +101,21 @@ class _CalenderScreenState extends State<CalenderScreen> {
               },
               onDaySelected: (selectedDay, focusedDay) {
                 if (!isSameDay(_selectedDay, selectedDay)) {
-                  _showDialog(context,focusedDay);
+                  // _showDialog(context,focusedDay);
                   setState(() {
                     // _showDialog(context);
                     _selectedDay = selectedDay;
                     _focusedDay = focusedDay;
                   });
+                  showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return modalSlider(
+                          day: _selectedDay,
+                        );
+                      });
                 }
               },
               calendarStyle: CalendarStyle(
@@ -118,7 +129,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.white,
                           shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(100)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(100)),
                           ),
                           side: const BorderSide(color: Colors.black12),
                         ),
@@ -141,7 +153,6 @@ class _CalenderScreenState extends State<CalenderScreen> {
                     ],
                   );
                 },
-
                 defaultBuilder:
                     (BuildContext context, DateTime day, DateTime focusedDay) {
                   return Container(
@@ -170,7 +181,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height*0.42,
+              height: MediaQuery.of(context).size.height * 0.42,
               decoration: BoxDecoration(color: Colors.black12),
             )
           ],
