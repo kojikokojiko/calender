@@ -60,7 +60,7 @@ class _AddSchedulePageState extends State<AddSchedulePage> {
                     backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)))),
-                child: Text("保存", style: TextStyle(color: Colors.black))),
+                child: Text("保存", style: TextStyle(color: Colors.black))),;.ll
           )
         ],
       ),
