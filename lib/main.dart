@@ -4,6 +4,8 @@ import 'package:intl/date_symbol_data_local.dart'; // 追加
 import "package:intl/intl.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
+import 'view/r_calender_screen.dart';
+import "package:flutter_localizations/flutter_localizations.dart";
 void main() {
   runApp(
       ProviderScope(
@@ -14,17 +16,22 @@ void main() {
 class stvCalender extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Intl.defaultLocale="ja_JP";
+    // Intl.defaultLocale="ja_JP";
     // 初期化のためのメソッドを追加
-    initializeDateFormatting('ja');
+    // initializeDateFormatting('ja');
     //
     return MaterialApp(
-      // theme: ThemeData.dark().copyWith(
-      //   textTheme: TextTheme(
-      //     // body1: TextStyle(color: Colors.black54),
-      //   ),
-      // ),
-      home: CalenderScreen(),
+
+      localizationsDelegates: [
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('ja'),
+      ],
+      locale: Locale("ja"),
+      home: rCalenderScreen(),
     );
   }
 }

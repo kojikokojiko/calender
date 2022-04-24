@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
 import 'add_schedule_page.dart';
-class modalSlider extends StatelessWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
+import 'package:stv_calender/model/myprovider.dart';
+import 'radd_schedule_page.dart';
+class modalSlider extends ConsumerWidget {
   modalSlider({this.day});
 
   final DateTime? day;
@@ -24,7 +28,7 @@ class modalSlider extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     setdaylist(diff_day, day);
     return CarouselSlider(
       options: CarouselOptions(
@@ -32,6 +36,7 @@ class modalSlider extends StatelessWidget {
         height: 550,
         viewportFraction: 0.8,
         initialPage: diff_day,
+        enableInfiniteScroll: false,
       ),
       items: day_list.map((selecting_day) {
         return Builder(
@@ -50,15 +55,16 @@ class modalSlider extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         // Text(day.toString()),
-                        Text(DateFormat("yyyy/MM/dd (E)").format(selecting_day),
+                        Text(DateFormat("yyyy/MM/dd (E)",'ja').format(selecting_day),
                             style: TextStyle(fontSize: 20)),
                         TextButton(
                             child: Icon(Icons.add),
                             onPressed: () {
+                              ref.read(selectDayProbvider.state).update((state)=>selecting_day);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => AddSchedulePage(),
+                                    builder: (context) => rAddSchedulePage(),
                                   ));
                             }),
                       ],
