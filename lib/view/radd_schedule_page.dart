@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:stv_calender/model/db/scheduledb.dart';
 import 'package:stv_calender/model/myprovider.dart';
 import 'package:stv_calender/view/component/shcedule_time.dart';
-import 'bottom_date_picker.dart';
+import 'component/bottom_date_picker.dart';
 import 'component/titleform.dart';
 import 'component/comment_form.dart';
 import 'component/time_checker.dart';

@@ -12,11 +12,11 @@ void main() {
   final database =MyDatabase();
   runApp(
       ProviderScope(
-        child:stvCalender()
+        child:MyApp()
       )
   );
 }
-class stvCalender extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Intl.defaultLocale="ja_JP";

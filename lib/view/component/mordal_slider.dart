@@ -31,19 +31,23 @@ class modalSlider extends ConsumerWidget {
     }
   }
 
-  AsyncSnapshot<List<Todo>>  SameDate(AsyncSnapshot<List<Todo>> snapshot, DateTime b,DateTime selecting_day) {
-    AsyncSnapshot<List<Todo>>  sameday_snap=AsyncSnapshot.withData(ConnectionState.active,snapshot.data!.where((element) => element.startDate==selecting_day).toList());
+  AsyncSnapshot<List<Todo>> SameDate(
+      AsyncSnapshot<List<Todo>> snapshot, DateTime b, DateTime selecting_day) {
+    AsyncSnapshot<List<Todo>> sameday_snap = AsyncSnapshot.withData(
+        ConnectionState.active,
+        snapshot.data!
+            .where((element) => element.startDate == selecting_day)
+            .toList());
     return sameday_snap;
   }
 
-  bool isSameDate(DateTime a,DateTime b){
-    if(a.year==b.year&&a.month==b.month&&a.day==b.day){
+  bool isSameDate(DateTime a, DateTime b) {
+    if (a.year == b.year && a.month == b.month && a.day == b.day) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -82,14 +86,15 @@ class modalSlider extends ConsumerWidget {
                         TextButton(
                             child: Icon(Icons.add),
                             onPressed: () {
-                              ref
+                                  ref
                                   .read(selectDayProbvider.state)
                                   .update((state) => selecting_day);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => rAddSchedulePage(),
-                                  ));
+                                  ),
+                              );
                             }),
                       ],
                     ),
@@ -105,24 +110,26 @@ class modalSlider extends ConsumerWidget {
                             return const Center(
                                 child: CircularProgressIndicator());
                           }
-                          return (snapshot.data!.length==0)?Center(child: Text("予定がありません")):ListView.builder(
-                              //11
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) =>
-                                  ScheduleCard(
-                                      snapshot: snapshot,
-                                      index: index,
-                                    )
-                            //     Visibility(
-                            //   visible: isSameDate(
-                            //       snapshot.data![index].startDate!,
-                            //       selecting_day),
-                            //   child: ScheduleCard(
-                            //     snapshot: snapshot,
-                            //     index: index,
-                            //   ),
-                            // ),
-                          );
+                          return (snapshot.data!.length == 0)
+                              ? Center(child: Text("予定がありません"))
+                              : ListView.builder(
+                                  //11
+                                  itemCount: snapshot.data!.length,
+                                  itemBuilder: (context, index) => ScheduleCard(
+                                        snapshot: snapshot,
+                                        index: index,
+                                        selecting_day: selecting_day,
+                                      )
+                                  //     Visibility(
+                                  //   visible: isSameDate(
+                                  //       snapshot.data![index].startDate!,
+                                  //       selecting_day),
+                                  //   child: ScheduleCard(
+                                  //     snapshot: snapshot,
+                                  //     index: index,
+                                  //   ),
+                                  // ),
+                                  );
                         },
                       ),
                     ),
