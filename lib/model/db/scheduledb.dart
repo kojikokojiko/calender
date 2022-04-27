@@ -62,6 +62,26 @@ class MyDatabase extends _$MyDatabase {
       startDate: Value(startDate),
       endDate: Value(endDate),
       isAllday: Value(isAllday),
-      isNotify: Value(isNotify),));
+      isNotify: Value(isNotify),
+    ));
+  }
+
+
+
+  Future<int> updateTodo(Todo todo, String title,String content,DateTime startDate,DateTime endDate,bool isAllday,bool isNotify) {
+    return (update(todos)..where((tbl) => tbl.id.equals(todo.id))).write(
+      TodosCompanion(
+        title: Value(title),
+        content: Value(content),
+        startDate: Value(startDate),
+        endDate: Value(endDate),
+        isAllday: Value(isAllday),
+        isNotify: Value(isNotify),
+      ),
+    );
+  }
+
+  Future<void> deleteTodo(Todo todo) {
+    return (delete(todos)..where((tbl) => tbl.id.equals(todo.id))).go();
   }
 }

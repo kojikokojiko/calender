@@ -1,11 +1,12 @@
 import "package:flutter/material.dart";
-class CommentForm extends StatelessWidget {
-  const CommentForm({
-    Key? key,
-  }) : super(key: key);
+import "package:stv_calender/model/myprovider.dart";
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
+class CommentForm extends ConsumerWidget {
+
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Container(
       margin: EdgeInsets.only(top: 10, bottom: 10),
       decoration: BoxDecoration(
@@ -14,7 +15,12 @@ class CommentForm extends StatelessWidget {
       width: double.infinity,
       height: 200,
       padding: EdgeInsets.all(10),
-      child: TextField(
+      child: TextFormField(
+        onChanged: (value){
+          ref.read(contentProvider.state).update((state) => value);
+
+
+        },
         // デフォルトで表示される青い下線を削除
         decoration: InputDecoration(
           hintText: "コメントを入力してください",

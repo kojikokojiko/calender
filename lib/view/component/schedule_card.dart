@@ -28,11 +28,13 @@ class ScheduleCard extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+
                       Text(DateFormat("HH:mm").format(snapshot!.data![index!].startDate!)),
                       Text(DateFormat("HH:mm").format(snapshot!.data![index!].endDate!)),
                     ],
                   ),
                   VerticalDivider(color: Colors.red,thickness: 10,),
+                  Text(snapshot!.data![index!].title),
                   Text(snapshot!.data![index!].content),
                 ],
               ),

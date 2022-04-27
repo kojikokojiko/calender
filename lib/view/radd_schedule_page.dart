@@ -21,7 +21,9 @@ class rAddSchedulePage extends ConsumerWidget {
     MyDatabase database=ref.watch(myDatabaseProvider);
     DateTime  startdate=ref.watch(selectDayProbvider);
     DateTime  enddate=ref.watch(scheduleEndTimeProvider);
-
+    String title=ref.watch(titleProvider);
+    String content=ref.watch(contentProvider);
+    final isAllday=ref.watch(isAlldayProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text("予定の追加"),
@@ -42,11 +44,11 @@ class rAddSchedulePage extends ConsumerWidget {
             child: ElevatedButton(
                 onPressed:()async {
                   await database.addTodo(
-                      "ppp",
-                      "sss",
+                      title,
+                      content,
                       startdate,
                       enddate,
-                      false,
+                      isAllday,
                       false
                   );
                   // ref.read(myDatabaseProvider.state).((state)=>state.addTodo);
@@ -73,28 +75,6 @@ class rAddSchedulePage extends ConsumerWidget {
               title_form(),
               ScheduleTime(),
               CommentForm(),
-              Expanded(
-                //10
-                //以下、Container()をStreamBuilder(...)に置き換え
-                child: StreamBuilder(
-                  stream: database.watchEntries(),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<List<Todo>> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    return ListView.builder(
-                      //11
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) => TextButton(
-                        child: Text(snapshot.data![index].content),
-                        onPressed: () async {
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
             ]),
           ),
         ),

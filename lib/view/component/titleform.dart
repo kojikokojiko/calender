@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stv_calender/model/myprovider.dart';
 
-class title_form extends StatelessWidget {
-  const title_form({
-    Key? key,
-  }) : super(key: key);
+class title_form extends ConsumerWidget {
+
+  String? _title;
 
   @override
-  Widget build(BuildContext context) {
-    return TextField(
+  Widget build(BuildContext context,WidgetRef ref) {
+    return TextFormField(
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         hintText: "タイトル",
-        // enabledBorder: OutlineInputBorder(
-        //   borderRadius:BorderRadius.circular(10),
-        //   borderSide: BorderSide(
-        //     color: Colors.blue
-        //   )
-        // )
       ),
+
+      onChanged: (value){
+        ref.read(titleProvider.state).update((state) => value);
+        print(value);
+        print(_title);
+      },
     );
   }
 }

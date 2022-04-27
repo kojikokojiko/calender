@@ -4,7 +4,7 @@ import 'package:stv_calender/view/component/mordal_slider.dart';
 import "package:table_calendar/table_calendar.dart";
 import "package:intl/intl.dart";
 import "color.dart";
-import "package:stv_calender/view/schedule_dialog.dart";
+// import "package:stv_calender/view/schedule_dialog.dart";
 import 'package:stv_calender/view/component/mordal_slider.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

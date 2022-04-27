@@ -24,6 +24,15 @@ final StateProvider <bool>isAlldayProvider=StateProvider((ref){
   return false;
 });
 
+final StateProvider <String>titleProvider=StateProvider((ref){
+  return "title";
+});
+
+
+
+final StateProvider <String>contentProvider=StateProvider((ref){
+  return "content";
+});
 
 
 final StateProvider <MyDatabase>myDatabaseProvider=StateProvider((ref){
