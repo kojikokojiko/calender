@@ -62,7 +62,7 @@ class ScheduleTime extends  ConsumerWidget{
                   },
 
                   child: Text(
-                    isAllday ? DateFormat("yyyy-MM-dd").format(startday):DateFormat("yyyy-MM-dd H:m").format(startday),
+                    isAllday ? DateFormat("yyyy-MM-dd").format(startday):DateFormat("yyyy-MM-dd HH:mm").format(startday),
                     style: TextStyle(color: Colors.black),
                   ),
                 )

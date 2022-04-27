@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stv_calender/model/myprovider.dart';
-import 'package:stv_calender/view/mordal_slider.dart';
+import 'package:stv_calender/view/component/mordal_slider.dart';
 import "package:table_calendar/table_calendar.dart";
 import "package:intl/intl.dart";
 import "color.dart";
 import "package:stv_calender/view/schedule_dialog.dart";
-import "package:stv_calender/view/mordal_slider.dart";
+import 'package:stv_calender/view/component/mordal_slider.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
@@ -59,19 +59,19 @@ class rCalenderScreen extends ConsumerWidget  {
 
 
 
-    void _showDialog(BuildContext context, day) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return ScheduleDialog(
-            day: day,
-          );
-          const AlertDialog(
-            content: Text('真ん中に出てくるやつ'), // <= ここでダイアログに表示したいWidgetを返してあげればOK
-          );
-        },
-      );
-    }
+    // void _showDialog(BuildContext context, day) {
+    //   showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       return ScheduleDialog(
+    //         day: day,
+    //       );
+    //       const AlertDialog(
+    //         content: Text('真ん中に出てくるやつ'), // <= ここでダイアログに表示したいWidgetを返してあげればOK
+    //       );
+    //     },
+    //   );
+    // }
 
     return Scaffold(
         appBar: AppBar(
@@ -185,10 +185,11 @@ class rCalenderScreen extends ConsumerWidget  {
                 },
               ),
             ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.42,
-              decoration: BoxDecoration(color: Colors.black12),
+            Expanded(
+              child: Container(
+
+                decoration: BoxDecoration(color: Colors.black12),
+              ),
             )
           ],
         ));

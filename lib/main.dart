@@ -6,7 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 import 'view/r_calender_screen.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
+import 'package:stv_calender/model/db/scheduledb.dart';
 void main() {
+
+  final database =MyDatabase();
   runApp(
       ProviderScope(
         child:stvCalender()
