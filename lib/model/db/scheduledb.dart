@@ -50,6 +50,17 @@ class MyDatabase extends _$MyDatabase {
   Stream<List<Todo>> watchEntries() {
     return (select(todos)).watch();
   }
+  
+  Stream<List<Todo>> watchSamedayEntries(DateTime selectday) {
+    return (select(todos)..where((tbl) => tbl.startDate.year.equals(selectday.year) & tbl.startDate.month.equals(selectday.month) & tbl.startDate.day.equals(selectday.day))).watch();
+  }
+  bool isSameDate(DateTime a,DateTime b){
+    if(a.year==b.year&&a.month==b.month&&a.day==b.day){
+      return true;
+    }else{
+      return false;
+    }
+  }
   //8
   //以下追記
   Future<List<Todo>> get allTodoEntries => select(todos).get();

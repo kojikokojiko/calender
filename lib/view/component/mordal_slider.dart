@@ -97,7 +97,7 @@ class modalSlider extends ConsumerWidget {
                       //10
                       //以下、Container()をStreamBuilder(...)に置き換え
                       child: StreamBuilder(
-                        stream: database.watchEntries(),
+                        stream: database.watchSamedayEntries(selecting_day),
                         builder: (BuildContext context,
                             AsyncSnapshot<List<Todo>> snapshot) {
                           if (snapshot.connectionState ==
@@ -105,23 +105,23 @@ class modalSlider extends ConsumerWidget {
                             return const Center(
                                 child: CircularProgressIndicator());
                           }
-                          return ListView.builder(
+                          return (snapshot.data!.length==0)?Center(child: Text("予定がありません")):ListView.builder(
                               //11
                               itemCount: snapshot.data!.length,
                               itemBuilder: (context, index) =>
-                                  // ScheduleCard(
-                                  //     snapshot: snapshot,
-                                  //     index: index,
-                                  //   )
-                                Visibility(
-                              visible: isSameDate(
-                                  snapshot.data![index].startDate!,
-                                  selecting_day),
-                              child: ScheduleCard(
-                                snapshot: snapshot,
-                                index: index,
-                              ),
-                            ),
+                                  ScheduleCard(
+                                      snapshot: snapshot,
+                                      index: index,
+                                    )
+                            //     Visibility(
+                            //   visible: isSameDate(
+                            //       snapshot.data![index].startDate!,
+                            //       selecting_day),
+                            //   child: ScheduleCard(
+                            //     snapshot: snapshot,
+                            //     index: index,
+                            //   ),
+                            // ),
                           );
                         },
                       ),
