@@ -2,7 +2,12 @@ import "package:flutter/material.dart";
 import "package:stv_calender/model/myprovider.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:stv_calender/model/db/scheduledb.dart';
 class CommentForm extends ConsumerWidget {
+
+  CommentForm({this.isEditing,this.todo});
+  bool? isEditing;
+  Todo? todo;
 
 
   @override

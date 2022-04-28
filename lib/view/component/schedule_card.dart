@@ -15,6 +15,7 @@ class ScheduleCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
+    Todo todo=snapshot!.data![index!];
     return Container(
       decoration: BoxDecoration(color: Colors.white),
       child: Column(
@@ -29,7 +30,7 @@ class ScheduleCard extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => rEditSchedulePage(),
+                    builder: (context) => rEditSchedulePage(todo:todo),
                   ),
                 );
               },
@@ -44,13 +45,13 @@ class ScheduleCard extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
 
-                      Text(DateFormat("HH:mm").format(snapshot!.data![index!].startDate!)),
-                      Text(DateFormat("HH:mm").format(snapshot!.data![index!].endDate!)),
+                      Text(DateFormat("HH:mm").format(todo.startDate!)),
+                      Text(DateFormat("HH:mm").format(todo.endDate!)),
                     ],
                   ),
                   VerticalDivider(color: Colors.red,thickness: 10,),
-                  Text(snapshot!.data![index!].title),
-                  Text(snapshot!.data![index!].content),
+                  Text(todo.title),
+                  Text(todo.content),
                 ],
               ),
             ),

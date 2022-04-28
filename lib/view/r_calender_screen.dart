@@ -4,16 +4,14 @@ import 'package:stv_calender/view/component/mordal_slider.dart';
 import "package:table_calendar/table_calendar.dart";
 import "package:intl/intl.dart";
 import "color.dart";
+
 // import "package:stv_calender/view/schedule_dialog.dart";
 import 'package:stv_calender/view/component/mordal_slider.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 
-class rCalenderScreen extends ConsumerWidget  {
-
-
-
+class rCalenderScreen extends ConsumerWidget {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay; //追記
   CalendarFormat _calendarFormat = CalendarFormat.month;
@@ -44,7 +42,6 @@ class rCalenderScreen extends ConsumerWidget  {
     // 選択がキャンセルされた場合はNULL
     if (selectedDate == null) return;
 
-
     // 選択されて日付で更新
     // _selectedDay
     // this.setState(() {
@@ -56,8 +53,6 @@ class rCalenderScreen extends ConsumerWidget  {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // final selectday=ref.watch(selectDayProbvider);
-
-
 
     // void _showDialog(BuildContext context, day) {
     //   showDialog(
@@ -88,8 +83,8 @@ class rCalenderScreen extends ConsumerWidget  {
               lastDay: DateTime.utc(2030, 12, 31),
               daysOfWeekStyle: DaysOfWeekStyle(
                   decoration: BoxDecoration(
-                    color: Colors.black12,
-                  )),
+                color: Colors.black12,
+              )),
               headerStyle: HeaderStyle(
                 formatButtonVisible: false,
                 titleCentered: true,
@@ -112,16 +107,19 @@ class rCalenderScreen extends ConsumerWidget  {
                   //   _selectedDay = selectedDay;
                   //   _focusedDay = focusedDay;
                   // });
-                  ref.read(selectDayProbvider.state).update((state) => selectedDay);
+                  ref
+                      .read(selectDayProbvider.state)
+                      .update((state) => selectedDay);
                   showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) {
-                        return modalSlider(
-                          day: ref.watch(selectDayProbvider),
-                        );
-                      });
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) {
+                      return modalSlider(
+                        day: ref.watch(selectDayProbvider),
+                      );
+                    },
+                  );
                 }
               },
               calendarStyle: CalendarStyle(
@@ -136,7 +134,7 @@ class rCalenderScreen extends ConsumerWidget  {
                           backgroundColor: Colors.white,
                           shape: const RoundedRectangleBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(100)),
+                                BorderRadius.all(Radius.circular(100)),
                           ),
                           side: const BorderSide(color: Colors.black12),
                         ),
@@ -187,7 +185,6 @@ class rCalenderScreen extends ConsumerWidget  {
             ),
             Expanded(
               child: Container(
-
                 decoration: BoxDecoration(color: Colors.black12),
               ),
             )

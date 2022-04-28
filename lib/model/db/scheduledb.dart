@@ -33,7 +33,7 @@ LazyDatabase _openConnection() {
     final dbFolder = await getApplicationDocumentsDirectory();
     //Path to a directory where the application may place data that is user-generated, or that cannot otherwise be recreated by your application.
     //データを配置することができるディレクトリのパス。
-    final file = File(p.join(dbFolder.path, 'db.sqlite'));
+    final file = File(p.join(dbFolder.path, 'db2.sqlite'));
     return NativeDatabase(file);
   });
 }
@@ -64,6 +64,12 @@ class MyDatabase extends _$MyDatabase {
   //8
   //以下追記
   Future<List<Todo>> get allTodoEntries => select(todos).get();
+
+  // Stream<Todo> todoById(int id) {
+  //   return (select(todos)..where((t) => t.id.equals(id))).watchSingle();
+  // }
+
+
 
 
   Future<int> addTodo(String title,String content,DateTime startDate,DateTime endDate,bool isAllday,bool isNotify) {

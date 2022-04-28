@@ -2,16 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stv_calender/model/myprovider.dart';
 
-class title_form extends ConsumerWidget {
-
+import 'package:stv_calender/model/db/scheduledb.dart';
+class TitleForm extends ConsumerWidget {
+  TitleForm({this.isEditing,this.todo});
+  bool? isEditing;
+  Todo? todo;
   String? _title;
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     return TextFormField(
+      initialValue: (isEditing!)?todo!.title:null,
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
+        filled: true,
+        fillColor: Colors.white,
+        border: InputBorder.none,
         hintText: "タイトル",
+
       ),
 
       onChanged: (value){

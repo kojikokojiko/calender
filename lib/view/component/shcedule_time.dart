@@ -5,9 +5,17 @@ import 'package:stv_calender/model/myprovider.dart';
 import 'time_checker.dart';
 import "package:intl/intl.dart";
 import 'package:flutter/cupertino.dart';
+import 'package:stv_calender/model/db/scheduledb.dart';
 class ScheduleTime extends  ConsumerWidget{
+
+
+  ScheduleTime({this.isEditing,this.todo});
+  bool? isEditing;
+  Todo? todo;
   @override
   Widget build(BuildContext context,WidgetRef ref) {
+
+
 
     final startday=ref.watch(selectDayProbvider);
     final endday=ref.watch(scheduleEndTimeProvider);
