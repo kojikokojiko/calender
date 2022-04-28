@@ -21,6 +21,7 @@ class CommentForm extends ConsumerWidget {
       height: 200,
       padding: EdgeInsets.all(10),
       child: TextFormField(
+        initialValue:(isEditing!)? todo!.content:"",
         onChanged: (value){
           ref.read(contentProvider.state).update((state) => value);
 

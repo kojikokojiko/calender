@@ -72,9 +72,9 @@ class rAddSchedulePage extends ConsumerWidget {
           child: Container(
             margin: EdgeInsets.all(10),
             child: Column(children: <Widget>[
-              TitleForm(),
-              ScheduleTime(),
-              CommentForm(),
+              TitleForm(isEditing: false,todo: null,),
+              ScheduleTime(isEditing: false,todo: null,),
+              CommentForm(isEditing: false,todo: null,),
             ]),
           ),
         ),

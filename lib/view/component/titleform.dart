@@ -12,7 +12,7 @@ class TitleForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     return TextFormField(
-      initialValue: (isEditing!)?todo!.title:null,
+      initialValue: (isEditing!)? todo!.title:"",
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
