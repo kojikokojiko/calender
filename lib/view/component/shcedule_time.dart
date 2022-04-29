@@ -18,8 +18,8 @@ class ScheduleTime extends  ConsumerWidget{
 
 
 
-    final startday=ref.watch(selectDayProvider);
-    final endday=ref.watch(scheduleEndTimeProvider);
+    final startday=ref.watch(startTimeProvider);
+    final endday=ref.watch(endTimeProvider);
     final isAllday=ref.watch(isAlldayProvider);
 
 
@@ -96,7 +96,7 @@ class ScheduleTime extends  ConsumerWidget{
                     );
                   },
                   child: Text(
-                    isAllday ? DateFormat("yyyy-MM-dd").format(endday):DateFormat("yyyy-MM-dd H:m").format(endday),
+                    isAllday ? DateFormat("yyyy-MM-dd").format(endday):DateFormat("yyyy-MM-dd HH:mm").format(endday),
                     style: TextStyle(color: Colors.black),
                   ),
                 ),

@@ -7,7 +7,7 @@ class TitleForm extends ConsumerWidget {
   TitleForm({this.isEditing,this.todo});
   bool? isEditing;
   Todo? todo;
-  String? _title;
+
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
@@ -20,11 +20,8 @@ class TitleForm extends ConsumerWidget {
         hintText: "タイトル",
 
       ),
-
       onChanged: (value){
         ref.read(titleProvider.state).update((state) => value);
-        print(value);
-        print(_title);
       },
     );
   }

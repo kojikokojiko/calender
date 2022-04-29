@@ -22,8 +22,12 @@ class rEditSchedulePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     MyDatabase database = ref.watch(myDatabaseProvider);
-    DateTime startdate = ref.watch(selectDayProvider);
-    DateTime enddate = ref.watch(scheduleEndTimeProvider);
+    DateTime startdate = ref.watch(startTimeProvider);
+    DateTime enddate = ref.watch(endTimeProvider);
+    WidgetsBinding.instance!.addPostFrameCallback((_) =>ref.read(startTimeProvider.state).update((state) => todo!.startDate!));
+    WidgetsBinding.instance!.addPostFrameCallback((_) =>ref.read(endTimeProvider.state).update((state) => todo!.endDate!));
+
+
     String title = ref.watch(titleProvider);
     String content = ref.watch(contentProvider);
     final isAllday = ref.watch(isAlldayProvider);
@@ -56,22 +60,6 @@ class rEditSchedulePage extends ConsumerWidget {
                 );
               },
             );
-
-            // showModalBottomSheet(
-            //   isScrollControlled: true,
-            //   backgroundColor: Colors.transparent,
-            //   context: context,
-            //   builder: (context) {
-            //     return Container(
-            //         child: Column(children: [
-            //           CupertinoButton(child: Text("dfdsfdsfdfs"), onPressed: () {}),
-            //           CupertinoButton(child: Text("dfdsfdsf"), onPressed: () {})
-            //         ]));
-            //   },
-            // );
-            //
-
-            // Navigator.pop(context);
           },
         ),
         //これを追加
@@ -92,9 +80,6 @@ class rEditSchedulePage extends ConsumerWidget {
                     isAllday,
                     false,
                   );
-                  // await database.addTodo(
-                  //     title, content, startdate, enddate, isAllday, false);
-                  // ref.read(myDatabaseProvider.state).((state)=>state.addTodo);
                 },
                 style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.grey[300],
@@ -120,7 +105,7 @@ class rEditSchedulePage extends ConsumerWidget {
               CommentForm(isEditing: true,todo: todo,),
               Container(
                 width: double.infinity,
-                // padding: EdgeInsets.all(),
+
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
                       primary: Colors.red, backgroundColor: Colors.white),

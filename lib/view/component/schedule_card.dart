@@ -24,9 +24,6 @@ class ScheduleCard extends ConsumerWidget {
           Container(
             child: TextButton(
               onPressed: (){
-                ref
-                    .read(selectDayProvider.state)
-                    .update((state) => selecting_day!);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

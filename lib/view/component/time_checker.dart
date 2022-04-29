@@ -7,12 +7,7 @@ class TimeChecker extends ConsumerWidget {
   DateTime? initday;
   bool? allday;
   bool? isstart;
-
   DateTime? _changedday;
-
-
-
-
   CupertinoDatePickerMode showmode=CupertinoDatePickerMode.date;
   @override
   Widget build(BuildContext context,WidgetRef ref) {
@@ -45,12 +40,12 @@ class TimeChecker extends ConsumerWidget {
                 child: Text("追加"),
                 onPressed: () {
                   if (isstart!){
-                    print(_changedday);
-                    ref.read(selectDayProvider.state).update((state) => _changedday!);
-                    print(ref.watch(selectDayProvider));
+                    // print(_changedday);
+                    ref.read(startTimeProvider.state).update((state) => _changedday!);
+                    // print(ref.watch(selectDayProvider));
                   }else{
                     print(_changedday);
-                    ref.read(scheduleEndTimeProvider.state).update((state) => _changedday!);
+                    ref.read(endTimeProvider.state).update((state) => _changedday!);
                   }
 
 

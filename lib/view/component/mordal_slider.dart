@@ -74,7 +74,7 @@ class modalSlider extends ConsumerWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => rAddSchedulePage(selecting_day),
+                                    builder: (context) => rAddSchedulePage(selected_day: selecting_day,),
                                   ),
                               );
                             }),

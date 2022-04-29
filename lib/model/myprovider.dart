@@ -4,28 +4,34 @@ import 'package:stv_calender/model/db/scheduledb.dart';
 
 
 
-final StateProvider <DateTime>selectDayProvider=StateProvider((ref){
+// final StateProvider <DateTime>selectDayProvider=StateProvider((ref){
+//   return DateTime.now();
+// });
+
+
+
+
+final startTimeProvider = StateProvider.autoDispose((ref){
   return DateTime.now();
-});
+} );
 
 
-
-
-final StateProvider <DateTime>scheuleStartTimeProvider=StateProvider((ref){
+final endTimeProvider = StateProvider.autoDispose((ref){
   return DateTime.now();
-});
 
-final StateProvider <DateTime>scheduleEndTimeProvider=StateProvider((ref){
-  return DateTime.now();
-});
+} );
 
 
-final StateProvider <bool>isAlldayProvider=StateProvider((ref){
+
+// final StateProvider <bool>isAlldayProvider=StateProvider((ref){
+//   return false;
+// });
+
+
+final isAlldayProvider = StateProvider.autoDispose<bool>((ref){
   return false;
-});
 
-
-
+} );
 //
 // final StateProvider <String>titleProvider=StateProvider((ref){
 //   return "title";

@@ -13,16 +13,20 @@ import 'component/time_checker.dart';
 class rAddSchedulePage extends ConsumerWidget {
   rAddSchedulePage({this.selected_day});
   DateTime? selected_day;
-  bool _active = false;
-  DateTime? start_day = DateTime.now();
-  DateTime? end_day = DateTime.now().add(Duration(hours: 1));
-  bool _allday=false;
+
+
+  //
+  // DateTime? start_day = DateTime.now();
+  // DateTime? end_day = DateTime.now().add(Duration(hours: 1));
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     MyDatabase database=ref.watch(myDatabaseProvider);
-    DateTime  startdate=ref.watch(selectDayProvider);
-    DateTime  enddate=ref.watch(scheduleEndTimeProvider);
+    DateTime  startTime=ref.watch(startTimeProvider);
+    DateTime  endTime=ref.watch(endTimeProvider);
+    WidgetsBinding.instance!.addPostFrameCallback((_) =>ref.read(startTimeProvider.state).update((state) => selected_day!));
+    WidgetsBinding.instance!.addPostFrameCallback((_) =>ref.read(endTimeProvider.state).update((state) => selected_day!));
+
     String title=ref.watch(titleProvider);
     String content=ref.watch(contentProvider);
     final isAllday=ref.watch(isAlldayProvider);
@@ -48,8 +52,8 @@ class rAddSchedulePage extends ConsumerWidget {
                   await database.addTodo(
                       title,
                       content,
-                      startdate,
-                      enddate,
+                      startTime,
+                      endTime,
                       isAllday,
                       false
                   );
