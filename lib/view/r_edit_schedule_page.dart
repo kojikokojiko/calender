@@ -20,12 +20,14 @@ class rEditSchedulePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    void _changeSwitch(bool e) {
+      ref.read(isAlldayProvider.state).update((state) => e);
+
+    };
 
     MyDatabase database = ref.watch(myDatabaseProvider);
-    DateTime startdate = ref.watch(startTimeProvider);
-    DateTime enddate = ref.watch(endTimeProvider);
-    WidgetsBinding.instance!.addPostFrameCallback((_) =>ref.read(startTimeProvider.state).update((state) => todo!.startDate!));
-    WidgetsBinding.instance!.addPostFrameCallback((_) =>ref.read(endTimeProvider.state).update((state) => todo!.endDate!));
+    DateTime startTime = ref.watch(startTimeProvider);
+    DateTime endTime = ref.watch(endTimeProvider);
 
 
     String title = ref.watch(titleProvider);
@@ -75,8 +77,8 @@ class rEditSchedulePage extends ConsumerWidget {
                     todo!,
                     title,
                     content,
-                    startdate,
-                    enddate,
+                    startTime,
+                    endTime,
                     isAllday,
                     false,
                   );
@@ -101,7 +103,84 @@ class rEditSchedulePage extends ConsumerWidget {
             margin: EdgeInsets.all(10),
             child: Column(children: <Widget>[
               TitleForm(isEditing: true,todo: todo,),
-              ScheduleTime(isEditing: true,todo: todo,),
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                width: double.infinity,
+                height: 200,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 5.0, bottom: 0, left: 10.0, right: 3.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("終日"),
+                          Switch(
+                            value: isAllday,
+                            onChanged: _changeSwitch,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Divider(color: Colors.black),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 3.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("開始"),
+                          TextButton(
+                            onPressed: () {
+                              showCupertinoModalPopup(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return TimeChecker(initday:startTime,allday: isAllday,isstart: true,);
+                                },
+                              );
+                            },
+
+                            child: Text(
+                              isAllday ? DateFormat("yyyy-MM-dd").format(startTime):DateFormat("yyyy-MM-dd HH:mm").format(startTime),
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Divider(color: Colors.black),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 5.0, left: 10.0, right: 3.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("終了"),
+                          TextButton(
+                            onPressed: () {
+                              showCupertinoModalPopup(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return TimeChecker(initday:endTime,allday:isAllday,isstart: false,);
+                                },
+                              );
+                            },
+                            child: Text(
+                              isAllday ? DateFormat("yyyy-MM-dd").format(endTime):DateFormat("yyyy-MM-dd HH:mm").format(endTime),
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               CommentForm(isEditing: true,todo: todo,),
               Container(
                 width: double.infinity,

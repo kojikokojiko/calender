@@ -12,8 +12,6 @@ class CalenderScreen extends StatefulWidget {
   _CalenderScreenState createState() => _CalenderScreenState();
 }
 
-DateTime? selectedDate;
-
 class _CalenderScreenState extends State<CalenderScreen> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay; //追記
@@ -31,29 +29,30 @@ class _CalenderScreenState extends State<CalenderScreen> {
     return _defaultTextColor;
   }
 
-//  月ピッカー
-//   DateTime date = DateTime.now();
-  selectDate(BuildContext context) async {
-    // 1年前から1年後の範囲でカレンダーから日付を選択します。
-    var selectedDate = await showMonthPicker(
-      context: context,
-      initialDate: this._focusedDay,
-      firstDate: DateTime(DateTime.now().year - 1),
-      lastDate: DateTime(DateTime.now().year + 1),
-    );
-
-    // 選択がキャンセルされた場合はNULL
-    if (selectedDate == null) return;
-
-    // 選択されて日付で更新
-    this.setState(() {
-      this._focusedDay = selectedDate;
-    });
-  }
 
   /////////////////////
   @override
   Widget build(BuildContext context) {
+
+//  月ピッカー
+//   DateTime date = DateTime.now();
+    selectDate(BuildContext context) async {
+      // 1年前から1年後の範囲でカレンダーから日付を選択します。
+      var selectedDate = await showMonthPicker(
+        context: context,
+        initialDate: this._focusedDay,
+        firstDate: DateTime(DateTime.now().year - 1),
+        lastDate: DateTime(DateTime.now().year + 1),
+      );
+
+      // 選択がキャンセルされた場合はNULL
+      if (selectedDate == null) return;
+
+      // 選択されて日付で更新
+      this.setState(() {
+        this._focusedDay = selectedDate;
+      });
+    }
     // void _showDialog(BuildContext context, day) {
     //   showDialog(
     //     context: context,
@@ -146,7 +145,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         style: TextStyle(fontSize: 20),
                       ),
                       TextButton(
-                        onPressed: () => this.selectDate(context),
+                        onPressed: () => selectDate(context),
                         child: Icon(Icons.arrow_drop_down_sharp),
                       )
                       // Text()

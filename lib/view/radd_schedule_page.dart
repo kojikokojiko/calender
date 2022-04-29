@@ -21,11 +21,14 @@ class rAddSchedulePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
+    void _changeSwitch(bool e) {
+      ref.read(isAlldayProvider.state).update((state) => e);
+
+    };
+
     MyDatabase database=ref.watch(myDatabaseProvider);
     DateTime  startTime=ref.watch(startTimeProvider);
     DateTime  endTime=ref.watch(endTimeProvider);
-    WidgetsBinding.instance!.addPostFrameCallback((_) =>ref.read(startTimeProvider.state).update((state) => selected_day!));
-    WidgetsBinding.instance!.addPostFrameCallback((_) =>ref.read(endTimeProvider.state).update((state) => selected_day!));
 
     String title=ref.watch(titleProvider);
     String content=ref.watch(contentProvider);
@@ -79,7 +82,84 @@ class rAddSchedulePage extends ConsumerWidget {
             margin: EdgeInsets.all(10),
             child: Column(children: <Widget>[
               TitleForm(isEditing: false,todo: null,),
-              ScheduleTime(isEditing: false,todo: null,),
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                width: double.infinity,
+                height: 200,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 5.0, bottom: 0, left: 10.0, right: 3.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("終日"),
+                          Switch(
+                            value: isAllday,
+                            onChanged: _changeSwitch,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Divider(color: Colors.black),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 3.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("開始"),
+                          TextButton(
+                            onPressed: () {
+                              showCupertinoModalPopup(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return TimeChecker(initday:startTime,allday: isAllday,isstart: true,);
+                                },
+                              );
+                            },
+
+                            child: Text(
+                              isAllday ? DateFormat("yyyy-MM-dd").format(startTime):DateFormat("yyyy-MM-dd HH:mm").format(startTime),
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Divider(color: Colors.black),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 5.0, left: 10.0, right: 3.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("終了"),
+                          TextButton(
+                            onPressed: () {
+                              showCupertinoModalPopup(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return TimeChecker(initday:endTime,allday:isAllday,isstart: false,);
+                                },
+                              );
+                            },
+                            child: Text(
+                              isAllday ? DateFormat("yyyy-MM-dd").format(endTime):DateFormat("yyyy-MM-dd HH:mm").format(endTime),
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               CommentForm(isEditing: false,todo: null,),
             ]),
           ),

@@ -47,8 +47,14 @@ class ScheduleCard extends ConsumerWidget {
                     ],
                   ),
                   VerticalDivider(color: Colors.red,thickness: 10,),
-                  Text(todo.title),
-                  Text(todo.content),
+                  Expanded(
+                    child: Text(
+                        todo.title,
+                      overflow: TextOverflow.ellipsis,
+
+                    ),
+                  ),
+                  // Text(todo.content),
                 ],
               ),
             ),
