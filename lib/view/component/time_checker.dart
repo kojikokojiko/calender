@@ -46,8 +46,8 @@ class TimeChecker extends ConsumerWidget {
                 onPressed: () {
                   if (isstart!){
                     print(_changedday);
-                    ref.read(selectDayProbvider.state).update((state) => _changedday!);
-                    print(ref.watch(selectDayProbvider));
+                    ref.read(selectDayProvider.state).update((state) => _changedday!);
+                    print(ref.watch(selectDayProvider));
                   }else{
                     print(_changedday);
                     ref.read(scheduleEndTimeProvider.state).update((state) => _changedday!);

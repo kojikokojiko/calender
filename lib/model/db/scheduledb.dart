@@ -85,7 +85,7 @@ class MyDatabase extends _$MyDatabase {
 
 
 
-  Future<int> updateTodo(Todo todo, String title,String content,DateTime startDate,DateTime endDate,bool isAllday,bool isNotify) {
+  Future<int> updateTodo(Todo todo, String title,String content,DateTime startDate,DateTime endDate,bool isAllday,isNotify) {
     return (update(todos)..where((tbl) => tbl.id.equals(todo.id))).write(
       TodosCompanion(
         title: Value(title),

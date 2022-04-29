@@ -31,24 +31,6 @@ class modalSlider extends ConsumerWidget {
     }
   }
 
-  AsyncSnapshot<List<Todo>> SameDate(
-      AsyncSnapshot<List<Todo>> snapshot, DateTime b, DateTime selecting_day) {
-    AsyncSnapshot<List<Todo>> sameday_snap = AsyncSnapshot.withData(
-        ConnectionState.active,
-        snapshot.data!
-            .where((element) => element.startDate == selecting_day)
-            .toList());
-    return sameday_snap;
-  }
-
-  bool isSameDate(DateTime a, DateTime b) {
-    if (a.year == b.year && a.month == b.month && a.day == b.day) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     MyDatabase database = ref.watch(myDatabaseProvider);
@@ -86,13 +68,13 @@ class modalSlider extends ConsumerWidget {
                         TextButton(
                             child: Icon(Icons.add),
                             onPressed: () {
-                                  ref
-                                  .read(selectDayProbvider.state)
-                                  .update((state) => selecting_day);
+                                  // ref
+                                  // .read(selectDayProvider.state)
+                                  // .update((state) => selecting_day);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => rAddSchedulePage(),
+                                    builder: (context) => rAddSchedulePage(selecting_day),
                                   ),
                               );
                             }),
@@ -120,15 +102,7 @@ class modalSlider extends ConsumerWidget {
                                         index: index,
                                         selecting_day: selecting_day,
                                       )
-                                  //     Visibility(
-                                  //   visible: isSameDate(
-                                  //       snapshot.data![index].startDate!,
-                                  //       selecting_day),
-                                  //   child: ScheduleCard(
-                                  //     snapshot: snapshot,
-                                  //     index: index,
-                                  //   ),
-                                  // ),
+
                                   );
                         },
                       ),

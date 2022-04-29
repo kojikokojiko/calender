@@ -18,7 +18,7 @@ class ScheduleTime extends  ConsumerWidget{
 
 
 
-    final startday=ref.watch(selectDayProbvider);
+    final startday=ref.watch(selectDayProvider);
     final endday=ref.watch(scheduleEndTimeProvider);
     final isAllday=ref.watch(isAlldayProvider);
 

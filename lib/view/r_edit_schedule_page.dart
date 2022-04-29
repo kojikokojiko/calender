@@ -22,7 +22,7 @@ class rEditSchedulePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     MyDatabase database = ref.watch(myDatabaseProvider);
-    DateTime startdate = ref.watch(selectDayProbvider);
+    DateTime startdate = ref.watch(selectDayProvider);
     DateTime enddate = ref.watch(scheduleEndTimeProvider);
     String title = ref.watch(titleProvider);
     String content = ref.watch(contentProvider);
@@ -83,6 +83,15 @@ class rEditSchedulePage extends ConsumerWidget {
             height: 20,
             child: ElevatedButton(
                 onPressed: () async {
+                  await database.updateTodo(
+                    todo!,
+                    title,
+                    content,
+                    startdate,
+                    enddate,
+                    isAllday,
+                    false,
+                  );
                   // await database.addTodo(
                   //     title, content, startdate, enddate, isAllday, false);
                   // ref.read(myDatabaseProvider.state).((state)=>state.addTodo);
@@ -134,11 +143,9 @@ class rEditSchedulePage extends ConsumerWidget {
                                 CupertinoDialogAction(
                                     child: Text("削除"),
                                     onPressed: () {
-
                                       // データを消す処理を実行
-
-
-
+                                      database.deleteTodo(todo!);
+                                      Navigator.of(context).pop();
                                       Navigator.of(context).pop();
                                     })
                               ],

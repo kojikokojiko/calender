@@ -4,7 +4,7 @@ import 'package:stv_calender/model/db/scheduledb.dart';
 
 
 
-final StateProvider <DateTime>selectDayProbvider=StateProvider((ref){
+final StateProvider <DateTime>selectDayProvider=StateProvider((ref){
   return DateTime.now();
 });
 
@@ -24,15 +24,26 @@ final StateProvider <bool>isAlldayProvider=StateProvider((ref){
   return false;
 });
 
-final StateProvider <String>titleProvider=StateProvider((ref){
+
+
+//
+// final StateProvider <String>titleProvider=StateProvider((ref){
+//   return "title";
+// });
+final titleProvider = StateProvider.autoDispose<String>((ref){
   return "title";
-});
 
+} );
 
-
-final StateProvider <String>contentProvider=StateProvider((ref){
+final contentProvider = StateProvider.autoDispose<String>((ref){
   return "content";
-});
+
+} );
+
+
+// final StateProvider <String>contentProvider=StateProvider((ref){
+//   return "content";
+// });
 
 
 final StateProvider <MyDatabase>myDatabaseProvider=StateProvider((ref){

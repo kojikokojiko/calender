@@ -11,6 +11,8 @@ import 'component/comment_form.dart';
 import 'component/time_checker.dart';
 
 class rAddSchedulePage extends ConsumerWidget {
+  rAddSchedulePage({this.selected_day});
+  DateTime? selected_day;
   bool _active = false;
   DateTime? start_day = DateTime.now();
   DateTime? end_day = DateTime.now().add(Duration(hours: 1));
@@ -19,7 +21,7 @@ class rAddSchedulePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     MyDatabase database=ref.watch(myDatabaseProvider);
-    DateTime  startdate=ref.watch(selectDayProbvider);
+    DateTime  startdate=ref.watch(selectDayProvider);
     DateTime  enddate=ref.watch(scheduleEndTimeProvider);
     String title=ref.watch(titleProvider);
     String content=ref.watch(contentProvider);

@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         const Locale('ja'),
       ],
       locale: Locale("ja"),
-      home: rCalenderScreen(),
+      home: CalenderScreen(),
     );
   }
 }
